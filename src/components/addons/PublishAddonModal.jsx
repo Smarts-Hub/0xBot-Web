@@ -6,6 +6,10 @@ function PublishAddonModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(false);
+  const [notification, setNotification] = useState({
+    type: "",
+    message: ""
+  });
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -38,7 +42,10 @@ function PublishAddonModal() {
     e.preventDefault();
 
     if (!token) {
-      alert("Please complete the Turnstile challenge!");
+      setNotification({
+        message: "You must complete the challenge!",
+        type: "error"
+      })
       return;
     }
 
@@ -53,16 +60,25 @@ function PublishAddonModal() {
       const data = await res.json();
 
       if (res.ok) {
-        alert("Addon published successfully!");
+        setNotification({
+          message: "Your addon has been published!",
+          type: "success"
+        })
         setIsOpen(false);
         setFormData({ name: "", price: "", author: "", description: "", url: "" });
         setToken("");
       } else {
-        alert(`Error: ${data.message}`);
+        setNotification({
+          message: "Something went wrong",
+          type: "error"
+        })
       }
     } catch (err) {
       console.error(err);
-      alert("Something went wrong.");
+      setNotification({
+        message: "Something went wrong",
+        type: "error"
+      })
     } finally {
       setLoading(false);
     }
@@ -91,6 +107,17 @@ function PublishAddonModal() {
               <i className="bi bi-x-lg"></i>
             </button>
 
+            {notification.type === "success" && (
+              <div className="my-3 rounded-lg px-4 py-2 font-medium bg-primary-950 text-primary-500">
+                <i class="bi bi-check-circle"></i> {notification.message}
+              </div>
+            )}
+
+            {notification.type === "error" && (
+              <div className="my-3 rounded-lg px-4 py-2 font-medium bg-amber-950 text-amber-500">
+                <i class="bi bi-exclamation-triangle"></i> {notification.message}
+              </div>
+            )}
             <h2 className="text-xl font-semibold text-white mb-4">Publish Addon</h2>
 
             <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
@@ -151,11 +178,10 @@ function PublishAddonModal() {
               <button
                 type="submit"
                 disabled={loading}
-                className={`mt-3 rounded-lg px-4 py-2 font-medium transition-all ${
-                  loading
-                    ? "bg-gray-700 text-gray-400 cursor-not-allowed"
-                    : "bg-primary-950 text-primary-500 hover:bg-primary-800"
-                }`}
+                className={`mt-3 rounded-lg px-4 py-2 font-medium transition-all ${loading
+                  ? "bg-gray-700 text-gray-400 cursor-not-allowed"
+                  : "bg-primary-950 text-primary-500 hover:bg-primary-800"
+                  }`}
               >
                 {loading ? "Publishing..." : "Publish"}
               </button>
