@@ -146,8 +146,8 @@ function PublishAddonModal() {
             )}
 
             {notification.type === "error" && (
-              <div className="my-3 rounded-lg px-4 py-2 font-medium bg-amber-950 text-amber-500">
-                <i class="bi bi-exclamation-triangle"></i> {notification.message}
+              <div className="my-3 rounded-lg px-4 py-2 font-medium bg-red-950 text-red-500">
+                <i class="bi bi-exclamation"></i> {notification.message}
               </div>
             )}
             <h2 className="text-xl font-semibold text-white mb-4">Publish Addon</h2>
