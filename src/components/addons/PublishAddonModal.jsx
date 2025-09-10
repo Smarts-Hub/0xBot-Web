@@ -14,19 +14,18 @@ function PublishAddonModal() {
     name: "",
     price: "",
     author: "",
+    email: "",
     description: "",
     url: "",
   });
   const widgetRef = useRef(null);
 
-  // Crear callback global para Turnstile
   useEffect(() => {
     window.turnstileCallback = (token) => {
       setToken(token);
     };
   }, []);
 
-  // Reset Turnstile y token al cerrar
   useEffect(() => {
     if (!isOpen && window.turnstile && widgetRef.current) {
       window.turnstile.reset(widgetRef.current);
@@ -48,6 +47,41 @@ function PublishAddonModal() {
       })
       return;
     }
+
+    if (formData.name.length > 15) {
+      setNotification({
+        message: "Your name must not exceed 15 characters.",
+        type: "error"
+      })
+      return;
+    }
+
+    if (formData.description.length > 50) {
+      setNotification({
+        message: "Your description must not exceed 50 characters.",
+        type: "error"
+      })
+      return;
+    }
+
+    const builtByBitRegex = /^https?:\/\/(www\.)?builtbybit\.com(\/.*)?$/i;
+
+    if (builtByBitRegex.test(formData.url)) {
+      setNotification({
+        message: "Your url must be a BuiltByBit.com URL.",
+        type: "error"
+      });
+      return;
+    }
+
+    if (!formData.author || !formData.description || !formData.email || !formData.name || !formData.url) {
+      setNotification({
+        message: "Fill all the fields before submitting.",
+        type: "error"
+      });
+      return;
+    }
+
 
     setLoading(true);
     try {
@@ -86,7 +120,6 @@ function PublishAddonModal() {
 
   return (
     <>
-      {/* Botón para abrir modal */}
       <button
         type="button"
         onClick={() => setIsOpen(true)}
@@ -95,7 +128,6 @@ function PublishAddonModal() {
         <i className="bi bi-plus"></i> Share your addon
       </button>
 
-      {/* Modal */}
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
           <div className="bg-black rounded-2xl p-6 w-[400px] shadow-lg relative border border-gray-700">
@@ -129,6 +161,8 @@ function PublishAddonModal() {
                 placeholder="Addon Name"
                 className="rounded-lg border border-gray-700 bg-gray-950 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary-700"
               />
+              <label htmlFor="name" className="text-sm text-gray-600 mt-0 mx-1">Your addon name. Max 15 chars</label>
+
               <input
                 name="price"
                 value={formData.price}
@@ -137,14 +171,27 @@ function PublishAddonModal() {
                 placeholder="Price (0 = Free)"
                 className="rounded-lg border border-gray-700 bg-gray-950 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary-700"
               />
+              <label htmlFor="price" className="text-sm text-gray-600 mt-0 mx-1">Set the same price as your BuiltByBit resource.</label>
+
               <input
                 name="author"
                 value={formData.author}
                 onChange={handleChange}
                 type="text"
                 placeholder="Author"
+                className="rounded-lg border border-gray-700 bg-gray-950 px-3 py-2 mb-0 text-white focus:outline-none focus:ring-2 focus:ring-primary-700"
+              />
+              <label htmlFor="author" className="text-sm text-gray-600 mt-0 mx-1">Multiple authors separated by ,</label>
+              <input
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                type="email"
+                placeholder="Your contact e-mail"
                 className="rounded-lg border border-gray-700 bg-gray-950 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary-700"
               />
+              <label htmlFor="email" className="text-sm text-gray-600 mt-0 mx-1">We won't share this email to anyone.</label>
+
               <textarea
                 name="description"
                 value={formData.description}
@@ -153,6 +200,8 @@ function PublishAddonModal() {
                 rows="3"
                 className="rounded-lg border border-gray-700 bg-gray-950 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary-700"
               ></textarea>
+              <label htmlFor="description" className="text-sm text-gray-600 mt-0 mx-1">A short overview of your module's characteristics. Max 50 chars.</label>
+
               <input
                 name="url"
                 value={formData.url}
@@ -161,8 +210,9 @@ function PublishAddonModal() {
                 placeholder="BuiltByBit.com URL"
                 className="rounded-lg border border-gray-700 bg-gray-950 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary-700"
               />
+              <label htmlFor="url" className="text-sm text-gray-600 mt-0 mx-1"><strong>It must be</strong> a BuiltByBit.com URL.</label>
 
-              {/* Turnstile */}
+
               <Script
                 src="https://challenges.cloudflare.com/turnstile/v0/api.js"
                 strategy="lazyOnload"
@@ -174,7 +224,6 @@ function PublishAddonModal() {
                 data-callback="turnstileCallback"
               ></div>
 
-              {/* Botón Publish */}
               <button
                 type="submit"
                 disabled={loading}

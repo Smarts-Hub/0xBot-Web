@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { token, name, price, author, description, url } = body;
+    const { token, name, price, author, description, url, email } = body;
 
     if (!token)
       return NextResponse.json({ message: "Turnstile token missing" }, { status: 400 });
@@ -29,6 +29,7 @@ export async function POST(req) {
         name,
         price: parseFloat(price),
         author,
+        email,
         description,
         url,
         verified: false

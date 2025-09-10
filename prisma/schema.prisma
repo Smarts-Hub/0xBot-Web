@@ -12,6 +12,7 @@ model Addon {
   name        String
   price       Float
   author      String
+  email       String
   description String
   url         String
   verified    Boolean @default(false)
