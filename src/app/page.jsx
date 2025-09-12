@@ -1,14 +1,14 @@
-import AddonList from "@/components/addons/AddonList";
 import Hero from "@/components/index/Hero";
-import InstantDeployPrice from "@/components/index/InstantDeployPrice";
-import Why from "@/components/index/Why";
-import Image from "next/image";
-
+import Features from "@/components/index/Features";
+import QuickSetup from "@/components/index/QuickSetup";
+import PreInstalledModules from "@/components/index/PreInstalledModules";
 export default function Home() {
   return (
     <>
       <Hero></Hero>
-      <Why></Why>
+      <Features></Features>
+      <QuickSetup></QuickSetup>
+      <PreInstalledModules></PreInstalledModules>
     </>
   );
 }
