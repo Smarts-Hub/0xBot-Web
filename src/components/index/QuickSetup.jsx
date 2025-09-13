@@ -13,7 +13,7 @@ function QuickSetup() {
 
                 <div className="mx-auto mt-5 max-w-[400px]">
                     <p className='text-xs text-gray-500'>Step 1</p>
-                    <p className='mb-2'>Download the bot from <a href="/download" className='text-primary-500 hover:text-primary-700 hover:cursor-pointer'>BuiltByBit</a></p>
+                    <p className='mb-2'>Download the bot from <a href="/download" className='text-primary-500 hover:text-primary-700 hover:cursor-pointer'>BuiltByBit <i className="bi bi-box-arrow-up-right"></i></a></p>
                 </div>
 
                 <div className="mx-auto mt-5 max-w-[400px]">
@@ -37,7 +37,7 @@ function QuickSetup() {
                 </div>
 
                 <div className="mx-auto mt-10 max-w-[400px]">
-                    <button onClick={() => {location.href='https://docs.smartshub.dev/0xbot/introduction'}} type="button" className="w-full rounded-xl border border-primary-500 bg-primary-950 px-5 py-2.5 text-center text-sm font-medium text-primary-500 transition-all hover:border-primary-800 hover:bg-primary-800 hover:cursor-pointer focus:ring focus:ring-primary-700 disabled:border-primary-700 disabled:bg-primary-950 disabled:text-primary-400"><i className="bi bi-book"></i> See docs</button>
+                    <button onClick={() => {location.href='https://docs.smartshub.dev/0xbot/introduction'}} type="button" className="w-full rounded-xl border border-primary-500 bg-primary-950 px-5 py-2.5 text-center text-sm font-medium text-primary-500 transition-all hover:border-primary-800 hover:bg-primary-800 hover:cursor-pointer focus:ring focus:ring-primary-700 disabled:border-primary-700 disabled:bg-primary-950 disabled:text-primary-400"><i className="bi bi-book"></i> See docs <i className="bi bi-box-arrow-up-right"></i></button>
 
                 </div>
 

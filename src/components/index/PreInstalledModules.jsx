@@ -37,7 +37,7 @@ function PreInstalledModules() {
                     </div>
                     <div className='rounded-xl border border-dashed border-primary-500 p-5 flex flex-col justify-center items-center'>
                         <h3 className='mb-3 text-2xl font-bold text-primary-500'>Much more addons</h3>
-                        <p className='text-md text-gray-100 font-bold'>Visit the <a href="https://builtbybit.com/resources/0xbot-next-generation-modular-bot.76821/" className='text-primary-500 hover:text-primary-700 hover:cursor-pointer'>product page <i className="bi bi-box-arrow-up-right"></i> </a> to see more features.</p>
+                        <p className='text-md text-gray-100 font-bold'>Visit the <a href="/download" className='text-primary-500 hover:text-primary-700 hover:cursor-pointer'>product page <i className="bi bi-box-arrow-up-right"></i> </a> to see more features.</p>
                     </div>
                     
 

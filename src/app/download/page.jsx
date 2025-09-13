@@ -6,13 +6,20 @@ function Page() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setSeconds((prev) => prev - 1);
+            setSeconds((prev) => {
+                if (prev <= 1) {
+                    clearInterval(interval); // detenemos el contador
+                    return 0;
+                }
+                return prev - 1;
+            });
         }, 1000);
+
 
         const timeout = setTimeout(() => {
             window.location.href =
                 "https://builtbybit.com/resources/0xbot-next-generation-modular-bot.76821/";
-        }, 3000);
+        }, 5000);
 
         return () => {
             clearInterval(interval);
