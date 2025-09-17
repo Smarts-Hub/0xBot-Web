@@ -66,7 +66,7 @@ function PublishAddonModal() {
 
     const builtByBitRegex = /^https?:\/\/(www\.)?builtbybit\.com(\/.*)?$/i;
 
-    if (builtByBitRegex.test(formData.url)) {
+    if (!builtByBitRegex.test(formData.url.trim())) {
       setNotification({
         message: "Your url must be a BuiltByBit.com URL.",
         type: "error"
