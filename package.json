@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "gen-prisma-client": "npx prisma generate",
+    "build-docker": "docker build -t 0xbotweb . && docker save -o 0xbotweb.tar 0xbotweb"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
