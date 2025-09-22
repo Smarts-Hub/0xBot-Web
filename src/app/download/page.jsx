@@ -18,7 +18,7 @@ function Page() {
 
         const timeout = setTimeout(() => {
             window.location.href =
-                "https://builtbybit.com/resources/0xbot-next-generation-modular-bot.76821/";
+                "https://builtbybit.com/resources/0xbot-powerful-multipurpose-bot.76821/";
         }, 5000);
 
         return () => {
